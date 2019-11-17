@@ -3,10 +3,9 @@ package com.myclass.api.controller;
 import java.io.File;
 import java.io.IOException;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,8 +16,9 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/api/file")
 public class ApiUploadController {
 
-	@PostMapping("upload")
-	public Object post(@RequestParam MultipartFile file, HttpServletRequest request) {
+	@CrossOrigin(origins = "*")
+	@PostMapping("/upload")
+	public Object post(@RequestParam MultipartFile file) {
 
 		try {
 			// Lấy đường dẫn tuyệt đối của thư mục chứa file upload
