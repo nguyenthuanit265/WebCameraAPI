@@ -20,7 +20,7 @@
 							</a>
 						</li>
 						<li class="breadcrumb-item">
-							<a href="#!">Danh sách quyền</a>
+							<a href="#!">Danh sách hình ảnh</a>
 						</li>
 					</ul>
 				</div>
@@ -45,21 +45,21 @@
 								</thead>
 								<tbody>
 									<tr th:if="${photos.empty}">
-										<td colspan="4">Danh sách rỗng!</td>
+										<td colspan="5">Danh sách rỗng!</td>
 									</tr>
 									<tr th:each="item : ${photos}">
 										<td th:text="${ itemStat.index + 1 }"></td>
-										<td th:text="${ item.nameImage }"></td>
+										<td th:text="${ item.namePhoto }"></td>
 										<td th:text="${ item.url }"></td>
 										<td th:text="${ item.user.name }"></td>
 										<td>
 											<a 
-												th:href="@{/admin/role/edit/{id}(id=${item.id})}" 
+												th:href="@{/admin/photo/edit/{id}(id=${item.id})}" 
 												class="btn btn-sm btn-info btn-round py-1 font-weight-bold">
 												Sửa
 											</a>
 											<a 
-												th:href="@{/admin/role/delete/{id}(id=${item.id})}" 
+												th:href="@{/admin/photo/delete/{id}(id=${item.id})}" 
 												class="btn btn-sm btn-danger btn-round py-1 font-weight-bold">
 												Xóa
 											</a>

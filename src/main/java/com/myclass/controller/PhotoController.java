@@ -39,13 +39,13 @@ public class PhotoController {
 	}
 
 	@PostMapping("add")
-	public String add(Model model, @Valid @ModelAttribute("user") Photo photo, BindingResult errors) {
+	public String add(Model model, @Valid @ModelAttribute("photo") Photo photo, BindingResult errors) {
 		// Kiểm tra nhập liệu
 		if (errors.hasErrors()) {
 			model.addAttribute("users", photoRepository.findAll());
 			return "photo/add";
 		}
-
+		//photo.setId(photoRepository.findAll().size()+1);
 		photoRepository.save(photo);
 		// Chuyển hướng về trang danh sách
 		return "redirect:/admin/photo";

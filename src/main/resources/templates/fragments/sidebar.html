@@ -1,0 +1,33 @@
+<nav class="pcoded-navbar" xmlns:th="http://www.thymeleaf.org" th:fragment="sidebar">
+	<div class="pcoded-inner-navbar main-menu">
+		<ul class="pcoded-item pcoded-left-item">
+			<li class="">
+				<a th:href="@{/admin/home}"> 
+					<span class="pcoded-micon">
+						<i class="feather icon-home"></i>
+					</span> 
+					<span class="pcoded-mtext">Dashboard</span>
+				</a>
+			</li>
+			
+			
+			
+			<li class="">
+				<a th:href="@{/admin/user}"> 
+					<span class="pcoded-micon">
+						<i class="feather icon-user"></i>
+					</span> 
+					<span class="pcoded-mtext">Thành Viên</span>
+				</a>
+			</li>
+			<li class="">
+				<a th:href="@{/admin/photo}"> 
+					<span class="pcoded-micon">
+						<i class="feather icon-user"></i>
+					</span> 
+					<span class="pcoded-mtext">Hình ảnh</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+</nav>

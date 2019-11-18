@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/default">
 <head>
-<meta charset="UTF-8">
-<title>Trang chủ</title>
+<title>HOME</title>
 </head>
 <body>
-<h1>HOME</h1>
+	<div layout:fragment="content">
+		<h1>TRANG CHỦ</h1>
+	</div>
 </body>
 </html>

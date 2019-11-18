@@ -3,29 +3,33 @@ package com.myclass.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.springframework.data.annotation.Id;
+
 
 @Entity
-@Table(name = "image")
+@Table(name = "photos")
 public class Photo {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
+	@Column(name = "name_photo")
 	private String namePhoto;
 
+	@Column(name = "url")
 	private String url;
 
 	@Column(name = "user_id")
 	private int userId;
 
 	@ManyToOne()
-	@JoinColumn(name = "id_user", insertable = false, updatable = false)
+	@JoinColumn(name = "user_id", insertable = false, updatable = false)
 	private User user;
 
 	public Photo() {
@@ -40,6 +44,14 @@ public class Photo {
 		this.userId = userId;
 		this.user = user;
 	}
+	public Photo(int id, String namePhoto, String url, int userId) {
+
+		this.id = id;
+		this.namePhoto = namePhoto;
+		this.url = url;
+		this.userId = userId;
+		
+	}
 
 	public Photo(String namePhoto, String url, int userId, User user) {
 
@@ -47,6 +59,14 @@ public class Photo {
 		this.url = url;
 		this.userId = userId;
 		this.user = user;
+	}
+	
+	public Photo(String namePhoto, String url, int userId) {
+
+		this.namePhoto = namePhoto;
+		this.url = url;
+		this.userId = userId;
+		
 	}
 
 	public int getId() {
@@ -64,8 +84,6 @@ public class Photo {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-
-	
 
 	public String getNamePhoto() {
 		return namePhoto;

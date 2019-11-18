@@ -3,22 +3,21 @@ package com.myclass.entity;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-import org.springframework.data.annotation.Id;
-
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	@NotBlank(message = "email không được bỏ trống")
@@ -41,18 +40,18 @@ public class User {
 	public User(int id, @NotBlank(message = "email không được bỏ trống") String email,
 			@NotBlank(message = "name không được bỏ trống") String name,
 			@NotBlank(message = "password không được bỏ trống") String password, List<Photo> images) {
-		
+
 		this.id = id;
 		this.email = email;
 		this.name = name;
 		this.password = password;
 		this.images = images;
 	}
+
 	public User(@NotBlank(message = "email không được bỏ trống") String email,
 			@NotBlank(message = "name không được bỏ trống") String name,
 			@NotBlank(message = "password không được bỏ trống") String password, List<Photo> images) {
-		
-		
+
 		this.email = email;
 		this.name = name;
 		this.password = password;
@@ -97,6 +96,11 @@ public class User {
 
 	public void setImages(List<Photo> images) {
 		this.images = images;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", email=" + email + ", name=" + name + ", password=" + password + "]";
 	}
 
 }
