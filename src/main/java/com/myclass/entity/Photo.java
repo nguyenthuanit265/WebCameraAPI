@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 
 @Entity
@@ -30,6 +32,7 @@ public class Photo {
 
 	@ManyToOne()
 	@JoinColumn(name = "user_id", insertable = false, updatable = false)
+	@JsonIgnoreProperties(value = {"images"})
 	private User user;
 
 	public Photo() {
@@ -107,6 +110,12 @@ public class Photo {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	@Override
+	public String toString() {
+		return "Photo [id=" + id + ", namePhoto=" + namePhoto + ", url=" + url + ", userId=" + userId + ", user=" + user
+				+ "]";
 	}
 
 }

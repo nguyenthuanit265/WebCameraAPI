@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/default">
+<head>
+<title>Cập nhật hình ảnh</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="row">
+			<div class="col-md-12 mb-2">
+				<div class="page-header-breadcrumb">
+					<ul class="breadcrumb-title">
+						<li class="breadcrumb-item"><a th:href="@{/admin}"> <i
+								class="feather icon-home"></i> Trang chủ
+						</a></li>
+						<li class="breadcrumb-item"><a th:href="@{/admin/photo}">Hình ảnh</a></li>
+						<li class="breadcrumb-item"><a href="#!">Cập nhật hình ảnh</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<div class="card">
+					<div class="card-header">
+						<h2 class="text-uppercase text-center">Cập nhật hình ảnh</h2>
+					</div>
+					<div class="card-block">
+						<form action="#" th:action="@{/admin/photo/edit}" th:object="${photo}" method="post">
+							<div class="row">
+								<div class="col-md-6 m-auto">
+								
+									<div class="form-group">
+										 
+										<input type="hidden" th:field="*{id}" class="form-control" />
+										<p class="text-danger" 
+												th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></p>
+									</div>
+									<div class="form-group">
+										<label>Tên image</label> 
+										<input type="text" th:field="*{namePhoto}" class="form-control" />
+										<p class="text-danger" 
+												th:if="${#fields.hasErrors('namePhoto')}" th:errors="*{namePhoto}"></p>
+									</div>
+									<div class="form-group">
+										<label>Mô tả</label> 
+										<input id="file_upload" type="hidden" th:field="*{url}" class="form-control" />
+										<p class="text-danger" 
+												th:if="${#fields.hasErrors('url')}" th:errors="*{url}"></p>
+									</div>
+									
+									<div class="form-group">
+										<label>Sở hữu người dùng</label> 
+										<select th:field="*{userId}" class="form-control">
+										
+											<option th:each="user : ${users}" th:value="${user.id}" th:text="${user.name}"></option>
+											
+										</select>
+										
+										<p class="text-danger" th:if="${#fields.hasErrors('userId')}"
+											th:errors="*{userId}"></p>
+									</div>
+									<div class="form-group mt-3">
+										<button type="submit" class="btn btn-primary m-b-0" onclick="fileuploadtext();">Lưu lại</button>
+										<a th:href="@{/admin/photo}" class="btn btn-secondary text-white">Quay lại</a>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</body>
+</html>

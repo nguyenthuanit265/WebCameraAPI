@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -31,6 +33,7 @@ public class User {
 
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = { CascadeType.REMOVE, CascadeType.REFRESH,
 			CascadeType.PERSIST })
+	@JsonIgnoreProperties(value = {"user"})
 	private List<Photo> images;
 
 	public User() {
@@ -56,6 +59,26 @@ public class User {
 		this.name = name;
 		this.password = password;
 		this.images = images;
+	}
+	
+	public User(int id, @NotBlank(message = "email không được bỏ trống") String email,
+			@NotBlank(message = "name không được bỏ trống") String name,
+			@NotBlank(message = "password không được bỏ trống") String password) {
+
+		this.id = id;
+		this.email = email;
+		this.name = name;
+		this.password = password;
+		
+	}
+
+	public User(@NotBlank(message = "email không được bỏ trống") String email,
+			@NotBlank(message = "name không được bỏ trống") String name,
+			@NotBlank(message = "password không được bỏ trống") String password) {
+
+		this.email = email;
+		this.name = name;
+		this.password = password;
 	}
 
 	public int getId() {

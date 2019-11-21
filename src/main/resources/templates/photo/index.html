@@ -39,6 +39,7 @@
 										<th>STT</th>
 										<th>Tên image</th>
 										<th>Mô Tả</th>
+										<th>Hình ảnh</th>
 										<th>Sở hữu</th>
 										<th>Hành Động</th>
 									</tr>
@@ -51,6 +52,10 @@
 										<td th:text="${ itemStat.index + 1 }"></td>
 										<td th:text="${ item.namePhoto }"></td>
 										<td th:text="${ item.url }"></td>
+										<td>
+											<img alt="" th:src="${ item.url }" height = "50px" width = "50px">
+										
+										</td>
 										<td th:text="${ item.user.name }"></td>
 										<td>
 											<a 
