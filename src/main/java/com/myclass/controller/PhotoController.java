@@ -1,5 +1,6 @@
 package com.myclass.controller;
 
+import java.io.File;
 import java.util.List;
 import java.util.Optional;
 
@@ -91,7 +92,18 @@ public class PhotoController {
 
 	@GetMapping("delete/{id}")
 	public String delete(@PathVariable("id") int id) {
-		// Xóa User theo id
+		// Xóa Photo theo id
+		Optional<Photo> photo = photoRepository.findById(id);
+		System.out.println("Photo delete: ");
+		System.out.println(photo.toString());
+//		File file=new File(photo.get().getUrl());
+//		if(file.exists()){
+//			if(file.delete()){
+//				System.out.println("File deleted successfully");
+//			}else{
+//				System.out.println("Fail to delete file");
+//			}
+//		}
 		photoRepository.deleteById(id);
 		// Chuyển hướng về trang danh sách
 		return "redirect:/admin/photo";
