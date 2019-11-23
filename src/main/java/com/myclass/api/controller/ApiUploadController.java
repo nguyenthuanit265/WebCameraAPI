@@ -35,6 +35,8 @@ public class ApiUploadController {
 		try {
 			System.out.println("Email: " + email);
 			System.out.println("Password: " + password);
+			
+			//email.replaceAll('"', "");
 			// Lấy đường dẫn tuyệt đối của thư mục chứa file upload
 			// String folderPath = request.getServletContext().getRealPath("/upload/");
 			 String folderPath = System.getProperty("user.dir");
@@ -75,8 +77,8 @@ public class ApiUploadController {
 			file.transferTo(filePath);
 			// int id=photoRepository.findAll().size();
 			// System.out.println("Length photo: " + id);
-//			int userIdUpload= user.getId();
-			Photo photo = new Photo(fileName, filePath.toString(), 1);
+			int userIdUpload= user.getId();
+			Photo photo = new Photo(fileName, filePath.toString(), userIdUpload);
 			photoRepository.save(photo);
 
 			System.out.println("Đã save file");

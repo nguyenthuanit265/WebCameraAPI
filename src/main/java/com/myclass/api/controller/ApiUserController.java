@@ -7,7 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,12 +20,12 @@ import com.myclass.repository.UserRepository;
 
 @RestController
 @ResponseBody
-@RequestMapping("/api")
+@RequestMapping("/api/")
 public class ApiUserController {
 	@Autowired
 	private UserRepository userRepository;
 
-	@GetMapping("user")
+	@GetMapping("/user")
 	// @CrossOrigin(origins = "http://localhost:8080/api")
 	@CrossOrigin(origins="*")
 	public ResponseEntity<List<User>> get() {
@@ -31,5 +34,20 @@ public class ApiUserController {
 			return new ResponseEntity(HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<List<User>>(users, HttpStatus.OK);
+	}
+	
+	@PostMapping("user/add")
+	// @CrossOrigin(origins = "http://localhost:8080/api")
+	@CrossOrigin(origins="*")
+	public Object post(String emailRegister, String nameRegister, String passwordRegister) {
+		
+		System.out.println(emailRegister);
+		System.out.println(nameRegister);
+		System.out.println(passwordRegister);
+		//List<User> users = userRepository.findAll();
+		User user = new User(emailRegister, nameRegister, passwordRegister);
+		
+		userRepository.save(user);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }
