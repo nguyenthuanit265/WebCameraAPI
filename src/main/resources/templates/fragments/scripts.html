@@ -15,6 +15,15 @@
     <script type="text/javascript" th:src="@{/assets/js/script.js}"></script>
     <script src="http://cdn.ckeditor.com/4.11.4/full/ckeditor.js"></script>
     <script src="http://cdn.ckeditor.com/4.4.7/standard-all/adapters/jquery.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+
+    <script>
+	
+	$(document).ready(function() {
+	    $('#dtBasicExample').DataTable();
+	} );
+	</script>
     <script>
     
     function fileuploadtext() {
@@ -24,4 +33,6 @@
 
     
     </script>
+    
+    
 </body>
