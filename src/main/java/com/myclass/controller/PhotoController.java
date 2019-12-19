@@ -34,7 +34,7 @@ public class PhotoController {
 		List<Photo> photos= photoRepository.findAll();
 		for (Photo photo : photos) {
 			
-			photo.setUrl("/upload/" + photo.getNamePhoto());
+			photo.setUrl("/assets/upload/" + photo.getNamePhoto());
 			System.out.println(photo.toString());
 		}
 		model.addAttribute("photos", photos);
