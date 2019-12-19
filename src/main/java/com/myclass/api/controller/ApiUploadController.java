@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.myclass.config.CloudinaryConfig;
+import com.myclass.entity.Photo;
+import com.myclass.entity.User;
 import com.myclass.repository.PhotoRepository;
 import com.myclass.repository.UserRepository;
 
@@ -80,6 +82,7 @@ public class ApiUploadController {
 		
 		String cloudinaryImgURL=null;
 	    try {
+	    	
 	        File fileDir = new File("rowFiles");
 	        if (! fileDir.exists()){
 	            fileDir.mkdir();
@@ -90,13 +93,32 @@ public class ApiUploadController {
 	        fout.write(file.getBytes());
 	        fout.close();
 	        File toUpload = new File("rowFiles/"+fileName);
-	        Cloudinary cloudinary = new Cloudinary();
-	        System.out.println("API Key:"+cloudinary.config.apiKey);
+	        CloudinaryConfig cloudinary = new CloudinaryConfig("764911318416866","sLVwlxrqxuK-ktLyO2BLwVW0WR8","dy5yspoxj");
+	       // System.out.println("API Key:"+cloudinary.config.apiKey);
 	        Map params = ObjectUtils.asMap("public_id", "SRWRestImageBase/"+fileName);
-	        Map uploadResult = cloudinary.uploader().upload(toUpload, params);
+//	        Map uploadResult = cloudinary.uploader().upload(toUpload, params);
+	        Map uploadResult = cloudinary.upload(toUpload, params);
 	        toUpload.delete();
 	        System.out.println("==============>>"+uploadResult.get("url"));
 	        cloudinaryImgURL=uploadResult.get("url").toString();
+	        
+	        
+	        User user = null;
+			user = userRepository.findByEmail(email);
+			if (user == null) {
+				System.out.println("Lỗi null");
+				return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+			}
+			if (user != null) {
+				System.out.println("User in database: " + user.toString());
+				if (!user.getPassword().equals(password)) {
+					return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+				}
+			}
+			
+			int userIdUpload = user.getId();
+			Photo photo = new Photo(fileName, cloudinaryImgURL, userIdUpload);
+			photoRepository.save(photo);
 	    } catch (Exception e) {
 	        System.out.println("upload:"+e.getMessage());
 	    }
