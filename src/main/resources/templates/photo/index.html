@@ -53,7 +53,10 @@
 										<td th:text="${ item.namePhoto }"></td>
 										<td th:text="${ item.url }"></td>
 										<td>
-											<img alt="" th:src="${ item.url }" height = "50px" width = "50px">
+											<a th:href= "${ item.url }">
+												<img alt="" th:src="${ item.url }" height = "50px" width = "50px">
+											
+											</a>
 										
 										</td>
 										<td th:text="${ item.user.name }"></td>
