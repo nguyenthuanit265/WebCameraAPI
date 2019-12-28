@@ -29,7 +29,39 @@
 						<a th:href="@{/admin/photo/add}" class="btn btn-sm btn-primary">Thêm
 							mới</a>
 					</div>
-					<div class="card-block table-border-style">
+<section class="photo container">
+       
+
+        <div class="row">
+            <!--class row của bootstrap gồm : 12 cột-->
+            <div th:each="item : ${photos}"  class="col-md-3">
+                
+                <div>
+                	<!-- <img alt="" th:src="@{/assets/image_product/1.jpg}"> -->
+                	<img alt="" th:src="${ item.url }" >
+                    <p>Tên hình: <span th:text="${ item.namePhoto }"></span></p>
+                    <p>Mô tả: 
+                    	<a th:href="${ item.url }">
+											<span th:text="${ item.url }"></span>
+										
+										 </a>
+                    
+                    </p>
+                    <p>Sở hữu: <span th:text="${ item.user.name }"></span></p>
+                    <p>
+                    		<a th:href="@{/admin/photo/edit/{id}(id=${item.id})}"
+											class="btn btn-sm btn-info btn-round py-1 font-weight-bold">
+												Sửa </a> <a th:href="@{/admin/photo/delete/{id}(id=${item.id})}"
+											class="btn btn-sm btn-danger btn-round py-1 font-weight-bold">
+												Xóa </a>
+                    </p>
+                </div>
+            </div>
+           
+        </div>
+
+    </section>
+	<!-- 				<div class="card-block table-border-style">
 						<div class="table-responsive">
 							<table id="dtBasicExample" class="table table-bordered">
 								<thead>
@@ -56,16 +88,16 @@
 										<td><img alt="" th:src="${ item.url }" height="50px"
 											width="50px"></td>
 										<td th:text="${ item.user.name }"></td>
-										<td><!-- <a th:href="@{/admin/photo/edit/{id}(id=${item.id})}"
+										<td> <a th:href="@{/admin/photo/edit/{id}(id=${item.id})}"
 											class="btn btn-sm btn-info btn-round py-1 font-weight-bold">
 												Sửa </a> <a th:href="@{/admin/photo/delete/{id}(id=${item.id})}"
 											class="btn btn-sm btn-danger btn-round py-1 font-weight-bold">
-												Xóa </a> --></td>
+												Xóa </a></td>
 									</tr>
 								</tbody>
 							</table>
 						</div>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>
