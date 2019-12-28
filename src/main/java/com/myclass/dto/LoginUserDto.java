@@ -4,7 +4,7 @@ public class LoginUserDto {
 
 	private String email;
 
-	private String fullname;
+	private String name;
 
 	private String password;
 
@@ -12,10 +12,10 @@ public class LoginUserDto {
 		// TODO Auto-generated constructor stub
 	}
 
-	public LoginUserDto(String email, String fullname, String password) {
+	public LoginUserDto(String email, String name, String password) {
 
 		this.email = email;
-		this.fullname = fullname;
+		this.name = name;
 		this.password = password;
 	}
 
@@ -27,13 +27,6 @@ public class LoginUserDto {
 		this.email = email;
 	}
 
-	public String getFullname() {
-		return fullname;
-	}
-
-	public void setFullname(String fullname) {
-		this.fullname = fullname;
-	}
 
 	public String getPassword() {
 		return password;
@@ -43,9 +36,17 @@ public class LoginUserDto {
 		this.password = password;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 	@Override
 	public String toString() {
-		return "LoginUserDto [email=" + email + ", fullname=" + fullname + ", password=" + password + "]";
+		return "LoginUserDto [email=" + email + ", name=" + name + ", password=" + password + "]";
 	}
+
 
 }
