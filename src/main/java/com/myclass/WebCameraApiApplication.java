@@ -51,7 +51,7 @@ public class WebCameraApiApplication implements Filter {
 
 		System.out.println(action);
 		// Trường hợp request yêu cầu vào trang login
-		if (action.equals("/admin/login")) {
+		if (action.equals("/admin/login") || action.startsWith("/api")) {
 
 			chain.doFilter(request, response);
 			return;
