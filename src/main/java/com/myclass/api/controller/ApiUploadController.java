@@ -91,7 +91,10 @@ public class ApiUploadController {
 	            fileDir.mkdir();
 	        }
 	        String fileNameWithExt =file.getOriginalFilename();
-	        String fileName=FilenameUtils.removeExtension(file.getOriginalFilename());
+	        
+	        //remove extension
+	        String fileName=FilenameUtils.removeExtension(fileNameWithExt);
+	        
 	        PhotoDto photoDto = photoRepository.findFileByName(fileName);
 	        if (photoDto!=null) {
 	        	
