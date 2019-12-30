@@ -15,5 +15,8 @@ public interface PhotoRepository extends JpaRepository<Photo, Integer> {
 	
 	@Query("SELECT new com.myclass.dto.PhotoDto(u.namePhoto, u.url) FROM Photo u WHERE u.userId = :id")
 	public ArrayList<PhotoDto> getFile(@RequestParam("id") int id);
+	
+	@Query("SELECT new com.myclass.dto.PhotoDto(u.namePhoto, u.url) FROM Photo u WHERE u.namePhoto = :namePhoto")
+	public PhotoDto findFileByName(@RequestParam("namePhoto") String namePhoto);
 
 }

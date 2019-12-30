@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.apache.commons.io.FilenameUtils;
 
 import com.cloudinary.utils.ObjectUtils;
 import com.myclass.config.CloudinaryConfig;
+import com.myclass.dto.PhotoDto;
 import com.myclass.entity.Photo;
 import com.myclass.entity.User;
 import com.myclass.repository.PhotoRepository;
@@ -28,6 +30,7 @@ public class ApiUploadController {
 	@Autowired
 	PhotoRepository photoRepository;
 	
+	private static int count = 1;
 
 	@PostMapping("/upload")
 	@CrossOrigin(origins = "*")
@@ -87,12 +90,21 @@ public class ApiUploadController {
 	        if (! fileDir.exists()){
 	            fileDir.mkdir();
 	        }
-	        String fileName=file.getOriginalFilename();
+	        String fileNameWithExt =file.getOriginalFilename();
+	        String fileName=FilenameUtils.removeExtension(file.getOriginalFilename());
+	        PhotoDto photoDto = photoRepository.findFileByName(fileName);
+	        if (photoDto!=null) {
+	        	
+	        	fileName+= "_"+ count++;
+	        }
+	        
+	        System.out.println("name file: " + fileName);
 	        File physicalFile=new File(file.getOriginalFilename());
 	        FileOutputStream fout=new FileOutputStream(fileDir.getName()+"/"+physicalFile);
 	        fout.write(file.getBytes());
 	        fout.close();
-	        File toUpload = new File("rowFiles/"+fileName);
+	        File toUpload = new File("rowFiles/"+fileNameWithExt);
+	        System.out.println("to Upload: " + toUpload.toString());
 	        CloudinaryConfig cloudinary = new CloudinaryConfig("764911318416866","sLVwlxrqxuK-ktLyO2BLwVW0WR8","dy5yspoxj");
 	       // System.out.println("API Key:"+cloudinary.config.apiKey);
 	        Map params = ObjectUtils.asMap("public_id", "SRWRestImageBase/"+fileName);
